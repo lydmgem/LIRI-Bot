@@ -21,6 +21,31 @@ var bandSearch = "";
 var spotifySearch = "";
 var movieSearch = "";
 
+// Switch case for each LIRI action, using break to prevent looping through the same action.
+function switchCase() {
+    switch(action) {
+        case 'concert-this':
+        getConcert();
+        break;
+
+        case 'spotify-this-song':
+        getSong();
+        break;
+
+        case 'movie-this':
+        getMovie();
+        break;
+
+        case 'do-what-it-says':
+        getReadme();
+        break;
+
+        default:                    // Used if there is a missing break
+        console.log("Sorry, no can do buddy!");
+        break;
+    }
+};
+
 // OMDb Search
 for (var i = 2; i <cmd.length; i++) {
     if (i > 2 && i < cmd.length) {
@@ -31,7 +56,7 @@ for (var i = 2; i <cmd.length; i++) {
     }
 }
 // Request with axios to the OMDB API with the movie specified
-function getOMDB() {
+function getMovie() {
 
 var omdbUrl = "http://www.omdbapi.com/?t=" + movieSearch + "&y=&plot=short&apikey=trilogy";
 console.log(omdbUrl);
@@ -59,4 +84,5 @@ axios.get(omdbUrl).then(
         }   
     }
 )}
-getOMDB();
+getMovie();
+switchCase();
