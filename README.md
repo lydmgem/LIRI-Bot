@@ -1,3 +1,16 @@
 # LIRI-Bot
 
-In this assignment, you will make LIRI. LIRI is like iPhone's SIRI. However, while SIRI is a Speech Interpretation and Recognition Interface, LIRI is a Language Interpretation and Recognition Interface. LIRI will be a command line node app that takes in parameters and gives you back data.
+## Requirements
+* Make a Node.js app that will depend on user input from the command line
+* We will integrate Spotify and OMDb APIs using the appropriate NPM modules
+* Using API calls to parse through returned JSON objects and output them accordingly in specified format.
+* Read commands and queries from file.
+
+
+
+## Technologies Used
+* Node.js
+* Javascript
+* Spotify API (via node-spotify-api npm module)
+* OMDb API (via Axios npm module)
+* Bands In Town (via Axios npm module)
