@@ -6,8 +6,6 @@
 * Using API calls to parse through returned JSON objects and output them accordingly in specified format.
 * Read commands and queries from file.
 
-
-
 ## Technologies Used
 * Node.js
 * Javascript
