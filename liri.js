@@ -49,28 +49,28 @@ function switchCase() {
 /*------------------------------------------------LIRI SEARCH FUNCTIONS--------------------------------------------------*/
 
 // Bands in Town Artist Events API - Concert Search
-// function getConcert() {
+function getConcert() {
 
-// var bandsUrl = "https://rest.bandsintown.com/artists/" + search + "/events?app_id=codingbootcamp";
-// console.log(bandsUrl);
+var bandsUrl = "https://rest.bandsintown.com/artists/" + search + "/events?app_id=codingbootcamp";
+console.log(bandsUrl);
 
-// axios.get(bandsUrl).then(
-//     function(response, error) {
-//         // console.log(response.data);
-//         console.log("Errors occurred: " + error);
+axios.get(bandsUrl).then(
+    function(response, error) {
+        // console.log(response.data);
+        console.log("Errors occurred: " + error);
 
-//         var dateTime = response.data[1].datetime; 
-//         var timeConvert = dateTime.split('T');
-//         var newTime = moment(timeConvert[0]).format("MMMM D, YYYY");
+        var dateTime = response.data[1].datetime; 
+        var timeConvert = dateTime.split('T');
+        var newTime = moment(timeConvert[0]).format("MMMM D, YYYY");
 
-//         console.log("***************************************\r\n\r\n");
-//         console.log(
-//             "Venue: " + (response.data[1].venue.name) +
-//             "\nLocation: " + (response.data[1].venue.city) + ", " + (response.data[1].venue.country) +
-//             "\nDate: " + newTime);
-//         console.log("\r\n\r\n***************************************");
-//         }
-// )};
+        console.log("***************************************\r\n\r\n");
+        console.log(
+            "Venue: " + (response.data[1].venue.name) +
+            "\nLocation: " + (response.data[1].venue.city) + ", " + (response.data[1].venue.country) +
+            "\nDate: " + newTime);
+        console.log("\r\n\r\n***************************************");
+        }
+)};
 
 // Spotify API - Song Search
 function getSong() {
@@ -103,25 +103,23 @@ var omdbUrl = "http://www.omdbapi.com/?t=" + search + "&y=&plot=short&apikey=tri
 
 axios.get(omdbUrl).then(
     function(res, err) {
-        console.log(res);
+        // console.log(res);
 
         if (err) {
             console.log("Errors occurred: " + err);
         }
-        else {
             console.log("***************************************\r\n\r\n");
             console.log(
-                "Title: " + response.data.Title +
-                "\nYear: " + response.data.Year +
-                "\nIMDB Rating: " + response.data.Ratings[0].Value +
-                "\nRotten Tomatoes Rating: " + response.data.Ratings[1].Value +
-                "\nProduction Location: " + response.data.Country +
-                "\nLanguage: " + response.data.Language +
-                "\nPlot: " + response.data.Plot +
-                "\nActors: " + response.data.Actors);        
+                "Title: " + res.data.Title +
+                "\nYear: " + res.data.Year +
+                "\nIMDB Rating: " + res.data.Ratings[0].Value +
+                "\nRotten Tomatoes Rating: " + res.data.Ratings[1].Value +
+                "\nProduction Location: " + res.data.Country +
+                "\nLanguage: " + res.data.Language +
+                "\nPlot: " + res.data.Plot +
+                "\nActors: " + res.data.Actors);        
             console.log("\r\n\r\n***************************************");
         }
-    }
 )};
 
 // Append "ReadMe"
