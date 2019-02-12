@@ -1,7 +1,7 @@
 // Include dotenv NPM package
 require("dotenv").config();
 
-// Include keys
+// Include keys for Spotify to run
 var keys = require('./keys.js');
 var Spotify = require('node-spotify-api');
 var spotify = new Spotify(keys.spotify);
@@ -10,7 +10,6 @@ var spotify = new Spotify(keys.spotify);
 var fs = require('fs');
 
 // Load required Node Modules
-
 var axios = require('axios');
 var moment = require('moment');
 
@@ -41,7 +40,7 @@ function switchCase() {
         break;
 
         default:                    // Used if there is a missing break
-        console.log("Sorry, no can do buddy!");
+        console.log("Cannot process. Something is missing!");
         break;
     }
 };
@@ -51,37 +50,37 @@ function switchCase() {
 // Bands in Town Artist Events API - Concert Search
 function getConcert() {
 
-var bandsUrl = "https://rest.bandsintown.com/artists/" + search + "/events?app_id=codingbootcamp";
-console.log(bandsUrl);
+    var bandsUrl = "https://rest.bandsintown.com/artists/" + search + "/events?app_id=codingbootcamp";
+    console.log(bandsUrl);
 
-axios.get(bandsUrl).then(
-    function(response, error) {
+    axios.get(bandsUrl).then(
+        function(response, error) {
         // console.log(response.data);
-        console.log("Errors occurred: " + error);
+        console.log((error ? "Errors occurred: " + error : "")); // Using ternary operator to show/hide if there is an error.
+            for (show of response.data) {
+            // console.log(show);
+            var dateTime = show.datetime; 
+            var timeConvert = dateTime.split('T');
+            var newTime = moment(timeConvert[0]).format("MM/DD/YYYY");
 
-        var dateTime = response.data[1].datetime; 
-        var timeConvert = dateTime.split('T');
-        var newTime = moment(timeConvert[0]).format("MMMM D, YYYY");
-
-        console.log("***************************************\r\n\r\n");
-        console.log(
-            "Venue: " + (response.data[1].venue.name) +
-            "\nLocation: " + (response.data[1].venue.city) + ", " + (response.data[1].venue.country) +
-            "\nDate: " + newTime);
-        console.log("\r\n\r\n***************************************");
+            console.log("***************************************\r\n");
+            console.log(
+                "Venue: " + (show.venue.name) +
+                "\nLocation: " + (show.venue.city) + ", " + (show.venue.region ? show.venue.region + ", " : "") + (show.venue.country) +
+                "\nDate: " + newTime + "\n");
+             }
         }
-)};
+    )
+};
 
 // Spotify API - Song Search
 function getSong() {
-    if (!search) {
-        search = "The Sign - Ace of Base";
-    }
-    
+    // Check to see if search field is empty, if so, it will default to search for The Sign by Ace of Base
+    search = !search ? 'The Sign - Ace of Base' : search;
+
+    // Run the API request from Spotify
     spotify.search({ type: 'track', query: search, limit: 1 }, function(err, data) {
-        if (err) {
-            return console.log('Errors occurred: ' + err);
-        }
+        console.log(err ? 'Errors occurred: ' + err : "");
 
         console.log("***************************************\r\n\r\n");
         console.log(
@@ -96,18 +95,16 @@ function getSong() {
 // OMDB API - Movie Search
 function getMovie() {
     // console.log(omdbUrl);
-    if (!search) {
-        search = "Hocus Pocus";
-    }
-var omdbUrl = "http://www.omdbapi.com/?t=" + search + "&y=&plot=short&apikey=trilogy";
+        // Check to see if search field is empty, if so, it will default to search for movie "Mr. Nobody"
+        search = !search ? 'Mr. Nobody' : search;
 
-axios.get(omdbUrl).then(
+    var omdbUrl = "http://www.omdbapi.com/?t=" + search + "&y=&plot=short&apikey=trilogy";
+
+    axios.get(omdbUrl).then(
     function(res, err) {
         // console.log(res);
+        console.log(err ? 'Errors occurred: ' + err : "");
 
-        if (err) {
-            console.log("Errors occurred: " + err);
-        }
             console.log("***************************************\r\n\r\n");
             console.log(
                 "Title: " + res.data.Title +
@@ -120,7 +117,23 @@ axios.get(omdbUrl).then(
                 "\nActors: " + res.data.Actors);        
             console.log("\r\n\r\n***************************************");
         }
-)};
+    )
+};
 
-// Append "ReadMe"
+// Run "ReadMe"
+function getReadme() {
+    fs.readFile("random.txt", "utf8", function(err, data) {
+        if (err) {
+            console.log("Errors occurred: " + err);
+        } else {
+            var toDo = data.split(",");
+            cmd = toDo[0];
+            search = toDo[1];
+
+            if (cmd === "spotify-this-song") {
+                getSong(cmd, search);
+            }
+        }
+    })
+};
 switchCase();
