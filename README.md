@@ -30,7 +30,7 @@ An error will be displayed with a possible solution if the command is not execut
 
 #### **"concert-this"**
 
-- When the user searches for an artist, their tour dates will display.
+- When the user searches for an artist, their tour dates and venue locations will display.
 ![concert-this](https://github.com/lydmgem/LIRI-Bot/blob/master/assets/images/getconcert.png?raw=true)
 
 #### **"spotify-this-song"**
