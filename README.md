@@ -36,7 +36,11 @@ An error will be displayed with a possible solution if the command is not execut
 #### **"spotify-this-song"**
 
 - When the user searches for a song, the artist, song title, a song preview link, and the album the song is from will display.
+
 (Disclaimer: some songs may or may not have a song preview link available.)
+
+Click here to check the link to this song here: https://p.scdn.co/mp3-preview/15fe176a40d3b34f83553eccc43743c9d039d3ca?cid=dec5e123dbe54c3caa2688138cfecc5e
+
 ![spotify-this-song](https://github.com/lydmgem/LIRI-Bot/blob/master/assets/images/spotifyit.png?raw=true)
 
 #### **"movie-this"**
