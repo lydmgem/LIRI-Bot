@@ -18,14 +18,14 @@
   },
   "homepage": "https://github.com/lydmgem/LIRI-Bot#readme",
   "dependencies": {
-    "axios": "^0.18.1",
+    "axios": "^0.21.1",
     "dotenv": "^6.2.0",
     "fs": "0.0.1-security",
     "moment": "^2.24.0",
     "node-spotify-api": "^1.0.7"
   },
   "devDependencies": {
-    "axios": ">=0.18.1",
+    "axios": ">=0.21.1",
     "lodash": ">=4.17.13"
   }
 }
